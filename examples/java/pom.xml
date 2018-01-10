@@ -184,6 +184,8 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <configuration>
               <useManifestOnlyJar>false</useManifestOnlyJar>
+              <forkCount>16</forkCount>
+              <reuseForks>false</reuseForks>
             </configuration>
             <executions>
               <execution>
