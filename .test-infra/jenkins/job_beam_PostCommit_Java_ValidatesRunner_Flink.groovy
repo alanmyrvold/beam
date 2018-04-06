@@ -19,7 +19,7 @@
 import common_job_properties
 
 // This job runs the suite of ValidatesRunner tests against the Flink runner.
-job('beam_PostCommit_Java_ValidatesRunner_Flink') {
+job('beam_PostCommit_Java_ValidatesRunner_Flink_Gradle') {
   description('Runs the ValidatesRunner suite on the Flink runner.')
 
   // Set common parameters.
@@ -33,6 +33,11 @@ job('beam_PostCommit_Java_ValidatesRunner_Flink') {
     // Until we verify the build cache is working appropriately, force rerunning all tasks
     '--rerun-tasks',
   ]
+
+  // Publish all test results to Jenkins
+  publishers {
+    archiveJunit('**/build/test-results/**/*.xml')
+  }
 
   // Sets that this is a PostCommit job.
   common_job_properties.setPostCommit(delegate)
